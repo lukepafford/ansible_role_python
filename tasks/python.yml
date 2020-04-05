@@ -1,6 +1,6 @@
 ---
 - name: Assert that all required variables are defined
-- assert:
+  assert:
     that:
       - python_version is defined
       - python_user is defined
@@ -63,7 +63,18 @@
   command: >
     configure
     --enable-optimizations
+    --prefix={{ python_installDir }}
   args:
     chdir: '{{ python_downloadDir }}/Python-{{ python_version }}'
+    creates: Makefile
+  become_user: '{{ python_user }}'
+  become: true
+
+
+- name: Install Python
+  command: make install
+  args:
+    chdir: '{{ python_downloadDir }}/Python-{{ python_version }}'
+    creates: '{{ python_installDir }}/bin/python3'
   become_user: '{{ python_user }}'
   become: true

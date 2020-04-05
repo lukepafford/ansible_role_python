@@ -1,4 +1,4 @@
 ---
-- import_tasks: python
+- import_tasks: python.yml
   tags:
     - python
