@@ -1,0 +1,55 @@
+---
+- assert:
+    that:
+      - python_version is defined
+      - python_user is defined
+      - python_downloadDir is defined
+
+
+- name: Install system libary dependencies
+  package:
+    name:
+      - gcc
+      - make
+      - openssl-devel
+      - bzip2-devel
+      - libffi
+      - libffi-devel
+      - sqlite-devel
+      - tcl-devel
+      - tk-devel
+      - readline-devel
+  become: true
+
+
+- name: Ensure the {{ python_downloadDir }} directory exists
+  file:
+    path: '{{ python_downloadDir }}'
+    state: directory
+  become_user: '{{ python_user }}'
+
+
+- name: Download the Python archive
+  get_url:
+    url: https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tgz
+    dest: '{{ python_downloadDir }}'
+  become_user: '{{ python_user }}'
+  register: python_download
+
+
+- name: Unarchive Python
+  unarchive:
+    src: '{{ python_download.dest }}'
+    dest: '{{ python_downloadDir }}'
+    creates: '{{ python_downloadDir }}/Python-{{ python_version }}'
+    remote_src: yes
+  become_user: '{{ python_user }}'
+
+
+- name: Configure Python from source
+  command: >
+    configure
+    --enable-optimizations
+  args:
+    chdir: '{{ python_downloadDir }}/Python-{{ python_version }}'
+  become_user: '{{ python_user }}'

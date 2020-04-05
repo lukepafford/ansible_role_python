@@ -1,0 +1,4 @@
+---
+python_version: 3.8.2
+python_user: '{{ ansible_user_id }}'
+python_installDir: '{{ ansible_user_dir }}/Downloads'
