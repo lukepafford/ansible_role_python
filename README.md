@@ -41,7 +41,7 @@ Example Playbook
 ----------------
 - hosts: servers
   roles:
-		- python
+		- lukepafford.python
 
 License
 -------
