@@ -1,9 +1,11 @@
 ---
+- name: Assert that all required variables are defined
 - assert:
     that:
       - python_version is defined
       - python_user is defined
       - python_downloadDir is defined
+      - python_installDir is defined
 
 
 - name: Install system libary dependencies
@@ -27,6 +29,7 @@
     path: '{{ python_downloadDir }}'
     state: directory
   become_user: '{{ python_user }}'
+  become: true
 
 
 - name: Download the Python archive
@@ -34,6 +37,7 @@
     url: https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tgz
     dest: '{{ python_downloadDir }}'
   become_user: '{{ python_user }}'
+  become: true
   register: python_download
 
 
@@ -44,6 +48,15 @@
     creates: '{{ python_downloadDir }}/Python-{{ python_version }}'
     remote_src: yes
   become_user: '{{ python_user }}'
+  become: true
+
+
+- name: Ensure the {{ python_installDir }} directory exists
+  file:
+    path: '{{ python_installDir }}'
+    state: directory
+  become_user: '{{ python_user }}'
+  become: true
 
 
 - name: Configure Python from source
@@ -53,3 +66,4 @@
   args:
     chdir: '{{ python_downloadDir }}/Python-{{ python_version }}'
   become_user: '{{ python_user }}'
+  become: true
