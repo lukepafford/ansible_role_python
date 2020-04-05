@@ -1,7 +1,7 @@
 python
 =========
 The goal is to provide a reliable way of ensuring a specific Python executable
-exists at a known path, which can be used as the `executable` argument for the 
+exists at a known path, which can be used as the `virtualenv_python` argument for the 
 `pip` module.
 
 You do not need to worry about setting any 'become' values. The role will
