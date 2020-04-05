@@ -7,6 +7,8 @@ exists at a known path, which can be used as the `executable` argument for the
 You do not need to worry about setting any 'become' values. The role will
 install the package correctly for the `python_user` variable.
 
+*No variables need to be defined for the role to work*
+
 
 The role downloads the `python_version` (Default: 3.8.2),
 for the `python_user` (Default: `ansible_user_id`) into the 
