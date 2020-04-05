@@ -1,7 +1,14 @@
 python
 =========
+The goal is to provide a reliable way of ensuring a specific Python executable
+exists at a known path, which can be used as the `executable` argument for the 
+`pip` module.
 
-Downloads the `python_version` (Default: 3.8.2),
+You do not need to worry about setting any 'become' values. The role will
+install the package correctly for the `python_user` variable.
+
+
+The role downloads the `python_version` (Default: 3.8.2),
 for the `python_user` (Default: `ansible_user_id`) into the 
 `python_downloadDir` (Default: `ansible_user_dir`/Downloads) directory.
 
@@ -9,12 +16,7 @@ The archive is then compiled and installed into the
 `python_installDir` (Default: `ansible_user_dir`/Python-`python_version`).
 
 
-The goal is to provide a reliable way of ensuring a specific Python executable
-exists at a known path, which can be used as the `executable` argument for the 
-`pip` module.
-
-You do not need to worry about setting any 'become' values. The role will
-install the package correctly for the `python_user` variable.
+The Python executable will be located at "`python_installDir`/bin/python3"
 
 
 Requirements
