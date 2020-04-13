@@ -61,7 +61,7 @@
 
 - name: Configure Python from source
   command: >
-    configure
+    ./configure
     --enable-optimizations
     --prefix={{ python_installDir }}
   args:
