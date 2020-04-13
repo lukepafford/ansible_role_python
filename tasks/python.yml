@@ -4,8 +4,23 @@
     that:
       - python_version is defined
       - python_user is defined
-      - python_downloadDir is defined
-      - python_installDir is defined
+
+
+- name: Create the {{ python_user }} user
+  user:
+    name: '{{ python_user }}'
+    state: present
+  register: python_user_info
+
+
+- set_fact:
+    python_downloadDir: '{{ python_user_info.home }}/Downloads'
+  when: python_downloadDir is not defined
+
+
+- set_fact:
+    python_installDir: '{{ python_user_info.home }}/Python-{{ python_version}}'
+  when: python_installDir is not defined
 
 
 - name: Install system libary dependencies
