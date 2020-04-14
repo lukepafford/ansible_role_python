@@ -10,16 +10,20 @@
   user:
     name: '{{ python_user }}'
     state: present
-  register: python_user_info
+  register: python_userInfo
 
 
 - set_fact:
-    python_downloadDir: '{{ python_user_info.home }}/Downloads'
+    python_userInfo: '{{ python_userInfo }}'
+
+
+- set_fact:
+    python_downloadDir: '{{ python_userInfo.home }}/Downloads'
   when: python_downloadDir is not defined
 
 
 - set_fact:
-    python_installDir: '{{ python_user_info.home }}/Python-{{ python_version}}'
+    python_installDir: '{{ python_userInfo.home }}/Python-{{ python_version}}'
   when: python_installDir is not defined
 
 
