@@ -39,6 +39,8 @@
       - bzip2-devel
       - libffi
       - libffi-devel
+      - xz
+      - xz-devel
       - sqlite-devel
       - tcl-devel
       - tk-devel
